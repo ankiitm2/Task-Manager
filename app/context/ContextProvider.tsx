@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GlobalProvider } from "@/app/context/GlobalProvider";
 
 interface Props {
@@ -7,6 +7,18 @@ interface Props {
 }
 
 const ContextProvider = ({ children }: Props) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsReady(true);
+    }, 200);
+  }, []);
+
+  if (!isReady) {
+    return null;
+  }
+
   return <GlobalProvider>{children}</GlobalProvider>;
 };
 
