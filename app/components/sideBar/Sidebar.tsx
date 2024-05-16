@@ -22,19 +22,19 @@ const Sidebar = () => {
     <SidebarStyled theme={theme}>
       <div className="profile">
         <div className="profile-overlay absolute top-0 left-0 h-full w-full backdrop-blur z-0 rounded-2xl"></div>
-        <div className="image flex items-center relative z-10 shrink-0 inline-block overflow-hidden">
+        <div className="image relative z-10 shrink-0 inline-block overflow-hidden">
           <Image
             width={70}
             height={60}
-            className="rounded-full object-cover transition-all duration-500"
+            className=""
             src="/AnkitProfile.jpg"
             alt="profile"
           />
-          <h1 className="flex flex-col text-xl leading-6 relative z-10 ml-3">
-            <span>Ankit</span>
-            <span> Mishra</span>
-          </h1>
         </div>
+        <h1 className="flex flex-col text-xl leading-6 relative z-10 ml-3">
+          <span>Ankit</span>
+          <span> Mishra</span>
+        </h1>
       </div>
       <ul className="nav-items">
         {menu.map((item) => {
@@ -76,6 +76,8 @@ const SidebarStyled = styled.nav`
     color: ${(props) => props.theme.colorGrey0};
     display: flex;
     align-items: center;
+    border-radius: 1rem;
+    cursor: pointer;
 
     .profile-overlay {
       transition: all 0.3s linear;
@@ -86,15 +88,28 @@ const SidebarStyled = styled.nav`
 
     .image {
       transition: all 0.5s ease;
-      > h1 {
-        font-size: clamp(1.2rem, 4vw, 1.4rem);
+      border-radius: 100%;
+      width: 70px;
+      height: 70px;
+
+      img {
+        border-radius: 100%;
+        transition: all 0.5s ease;
       }
+    }
+
+    > h1 {
+      font-size: clamp(1.2rem, 4vw, 1.4rem);
     }
 
     &:hover {
       .profile-overlay {
         opacity: 1;
         border: 2px solid ${(props) => props.theme.borderColor2};
+      }
+
+      img {
+        transform: scale(1.1);
       }
     }
   }
