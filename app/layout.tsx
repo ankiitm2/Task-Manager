@@ -5,6 +5,7 @@ import Sidebar from "./components/sideBar/Sidebar";
 import GlobalStyledProvider from "./providers/GlobalStyledProvider";
 import ContextProvider from "./context/ContextProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth();
+
   return (
     <ClerkProvider>
       <html lang="en">
@@ -33,7 +36,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ContextProvider>
             <GlobalStyledProvider>
-              <Sidebar />
+              {userId && <Sidebar />}
               <div className="w-full">{children}</div>
             </GlobalStyledProvider>
           </ContextProvider>
