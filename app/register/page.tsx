@@ -4,7 +4,7 @@ import { useGlobalState } from "@/app/context/GlobalProvider";
 import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
 
-function Page() {
+function Register() {
   const [error, setError] = useState("");
   const { theme } = useGlobalState();
 
@@ -15,12 +15,13 @@ function Page() {
     const name = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
+    console.log(" test 1 ");
 
     try {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name,
@@ -28,6 +29,7 @@ function Page() {
           password,
         }),
       });
+      console.log("res === ", res);
       if (res.status === 400) {
         setError("Email is already regitered");
       }
@@ -259,4 +261,4 @@ const SignUpStyled = styled.div`
   }
 `;
 
-export default Page;
+export default Register;

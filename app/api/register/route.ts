@@ -9,21 +9,23 @@ export const POST = async (request: any) => {
   await connect();
 
   const existingUSer = await User.findOne({ email });
+  console.log("existingUSer === ", existingUSer);
   if (existingUSer) {
     return new NextResponse("Email is already in use", { status: 400 });
   }
 
   const hashedPassword = await bcrypt.hash(password, 5);
-  const newUser = await new User({
+  const newUser = new User({
     name,
     email,
     password: hashedPassword,
   });
 
   try {
-    await new newUser.save();
+    await newUser.save();
     return new NextResponse("User is Registered", { status: 200 });
-  } catch (error) {
-    return new NextResponse("connection failed", { status: 500 });
+  } catch (error: any) {
+    console.log("error === ", error);
+    return new NextResponse(error, { status: 500 });
   }
 };
