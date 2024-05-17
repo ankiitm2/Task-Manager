@@ -12,6 +12,14 @@ function Page() {
         <div className="heading text-center font-black">Sign Up</div>
         <form className="form" action="">
           <input
+            placeholder="Name"
+            id="name"
+            name="name"
+            type="text"
+            className="input"
+            required
+          />
+          <input
             placeholder="E-mail"
             id="email"
             name="email"
@@ -27,10 +35,7 @@ function Page() {
             className="input"
             required
           />
-          <span className="forgot-password">
-            <a href="#">Forgot Password ?</a>
-          </span>
-          <input value="Sign In" type="submit" className="login-button" />
+          <input value="Sign Up" type="submit" className="login-button" />
         </form>
         <div className="social-account-container">
           <span className="title">Or Sign in with</span>
@@ -78,16 +83,10 @@ function Page() {
 const SignUpStyled = styled.div`
   .container {
     max-width: 26.875rem;
-    background: #f8f9fd;
-    background: linear-gradient(
-      0deg,
-      rgb(255, 255, 255) 0%,
-      rgb(244, 247, 251) 100%
-    );
+    background-color: ${(props) => props.theme.colorBg2};
+    border: 2px solid ${(props) => props.theme.borderColor2};
     border-radius: 2.5rem;
     padding: 25px 35px;
-    border: 5px solid rgb(255, 255, 255);
-    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
 
     .heading {
       font-size: 30px;
@@ -98,14 +97,14 @@ const SignUpStyled = styled.div`
       margin-top: 20px;
 
       .input {
+        background-color: ${(props) => props.theme.colorBg2};
+        border: 2px solid ${(props) => props.theme.borderColor2};
         width: 100%;
-        border: none;
         padding: 15px 20px;
         border-radius: 20px;
         margin-top: 15px;
-        box-shadow: #cff0ff 0px 10px 10px -5px;
-        border-inline: 2px solid transparent;
-        color: ${(props) => props.theme.colorGreyDark};
+        box-shadow: #cff0ff 0px 9px 7px -10px;
+        color: ${(props) => props.theme.colorTextPrimary};
       }
 
       .input::-moz-placeholder {
@@ -146,7 +145,7 @@ const SignUpStyled = styled.div`
         padding-block: 15px;
         margin: 20px auto;
         border-radius: 20px;
-        box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+        box-shadow: #cff0ff 0px 9px 7px -10px;
         border: none;
         transition: all 0.2s ease-in-out;
       }
@@ -168,7 +167,7 @@ const SignUpStyled = styled.div`
       .title {
         display: block;
         text-align: center;
-        font-size: 10px;
+        font-size: 14px;
         color: rgb(170, 170, 170);
       }
 
@@ -185,18 +184,18 @@ const SignUpStyled = styled.div`
             rgb(0, 0, 0) 0%,
             rgb(112, 112, 112) 100%
           );
-          border: 5px solid white;
+          border: 0px solid ${(props) => props.theme.borderColor2};
           padding: 5px;
           border-radius: 50%;
           width: 40px;
           aspect-ratio: 1;
           display: grid;
           place-content: center;
-          box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px 10px -8px;
+          box-shadow: rgba(133, 189, 215, 0.8784313725) -2px 8px 15px -10px;
           transition: all 0.2s ease-in-out;
 
           .svg {
-            fill: white;
+            fill: ${(props) => props.theme.colorTextPrimary};
             margin: auto;
           }
         }
@@ -215,7 +214,7 @@ const SignUpStyled = styled.div`
       display: block;
       text-align: center;
       margin-top: 15px;
-      color: ${(props) => props.theme.colorGreyDark};
+      color: ${(props) => props.theme.colorTextPrimary};
 
       a {
         text-decoration: none;

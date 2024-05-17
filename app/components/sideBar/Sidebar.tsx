@@ -41,6 +41,7 @@ const Sidebar = () => {
           const link = item.link;
           return (
             <li
+              key={item.id}
               className={`nav-item cursor-pointer relative grid ${
                 pathName === link ? "active" : ""
               } `}
