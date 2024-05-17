@@ -1,16 +1,50 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalState } from "@/app/context/GlobalProvider";
 import { styled } from "styled-components";
+import { useRouter } from "next/navigation";
 
 function Page() {
+  const [error, setError] = useState("");
   const { theme } = useGlobalState();
+
+  const route = useRouter();
+
+  const handleSignUp = async (e: any) => {
+    e.preventDefault();
+    const name = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+      if (res.status === 400) {
+        setError("Email is already regitered");
+      }
+      if (res.status === 200) {
+        setError("");
+        route.push("/signin");
+      }
+    } catch (error) {
+      setError("Error, Try again");
+    }
+  };
 
   return (
     <SignUpStyled theme={theme}>
       <div className="container m-5">
         <div className="heading text-center font-black">Sign Up</div>
-        <form className="form" action="">
+        <form className="form" onSubmit={handleSignUp}>
           <input
             placeholder="Name"
             id="name"
